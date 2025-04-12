@@ -36,7 +36,7 @@ To delete a task, click the "Delete" button next to the task you want to delete.
 
 * `index.html` :
      This is the main file that contains the html code for the To-Do List.
-* `style.css` :
+* `styles.css` :
      This file contains the styling for the To-Do List.
 * `script.js` :
      This file contains the logic for the To-Do List, including adding, editing, and deleting tasks, and filtering the task list.
