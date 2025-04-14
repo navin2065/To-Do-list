@@ -1,42 +1,32 @@
-# Output
-Website-https://navin-to-do-list.netlify.app/
-![17444019163052808908456675142341](https://github.com/user-attachments/assets/d1cb246b-b114-4a95-b6bf-fdaed399751f)
 
-# To-Do-list
-Navin's FullStack Development First Task To-Do list
+# Shopping Cart - Javascript
 
-About The Project:
-The To-Do List project is a simple web application that allows users to create and manage a list of tasks they need to complete. With a clean and intuitive interface, users can quickly add, edit, and delete tasks, as well as mark tasks as complete. This project is built with JavaScript and is a great example of a basic web application using DOM manipulation and event listeners.
+This is a Shopping Cart built with HTML, CSS,Bootstrap & JavaScript. In this simple shopping cart web application project I have used  some of the more intermediate advanced parts of the document object model or the javascript dom to show  how to build this web application. 
 
-## Usage
+## Features
 
-- Open the index.html file in your browser
+- Users can filter the product items.
+- User should click the 'Add to Cart' button to add a product to the cart.
+- A message displays if user try to add same product twise.
+- The cart displays the image, title, price, amount of each product that user has added to the cart.
+- User can remove any product item from the cart.
+- User can change the count of the products that they want to buy.
+- The total price of the products which are in the cart will display.
 
-### 1. Adding a task
-To add a task to the to-do list, simply enter the task description in the input field at the top of the page and press the "Add" button. The task will be added to the list.
+## Technologies
 
-### 2. Updating a task
-To update a task, click on the task you want to update. This will open a modal window where you can edit the task description. Once you have made your changes, click the "Save" button to update the task.
-
-### 3. Completing a task
-To mark a task as complete, simply click the checkbox next to the task description. The task will be crossed out to indicate that it has been completed.
-
-### 4. Deleting a task
-To delete a task, click the "Delete" button next to the task you want to delete. This will remove the task from the to-do list.
-
-
-## Requirements
+Built with:
 
 - HTML
 - CSS
-- Javascript
+- Bootstrap
+- JavaScript
+
+## Screenshots
 
 
-## Files
+![](images/1.jpeg)
 
-* `index.html` :
-     This is the main file that contains the html code for the To-Do List.
-* `styles.css` :
-     This file contains the styling for the To-Do List.
-* `script.js` :
-     This file contains the logic for the To-Do List, including adding, editing, and deleting tasks, and filtering the task list.
+![](images/2.jpeg)
+
+![](images/4.jpeg)
