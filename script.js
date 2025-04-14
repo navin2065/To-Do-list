@@ -1,69 +1,153 @@
-const input = document.querySelector('#todo-input');
-document.querySelector('#submit').addEventListener('click', () => {
-  const inputData = input.value;
-  input.value = "";
 
-  const todo_el = document.createElement('div');
-  todo_el.classList.add('todo-item');
 
-  const todo_content_el = document.createElement('div');
-  todo_el.appendChild(todo_content_el);
+const allFilterItems = document.querySelectorAll('.filter-item');
+const allFilterBtns = document.querySelectorAll('.filter-btn');
 
-  const todo_input_el = document.createElement('input');
-  todo_input_el.classList.add('text');
-  todo_input_el.type = 'text';
-  todo_input_el.value = inputData;
-  todo_input_el.setAttribute('readonly', 'readonly');
+window.addEventListener('DOMContentLoaded', () => {
+    allFilterBtns[1].classList.add('active-btn');
+});
 
-  todo_content_el.appendChild(todo_input_el);
+allFilterBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+        showFilteredContent(btn);
+    });
+});
 
-  const todo_actions_el = document.createElement('div');
-  todo_actions_el.classList.add('action-items');
+function showFilteredContent(btn){
+    allFilterItems.forEach((item) => {
+        if(item.classList.contains(btn.id)){
+            resetActiveBtn();
+            btn.classList.add('active-btn');
+            item.style.display = "block";
+        } else {
+            item.style.display = "none";
+        }
+    });
+}
 
-  const todo_done_el = document.createElement('i');
-  todo_done_el.classList.add('fa-solid');
-  todo_done_el.classList.add('fa-check');
+function resetActiveBtn(){
+    allFilterBtns.forEach((btn) => {
+        btn.classList.remove('active-btn');
+    });
+}
 
-  const todo_edit_el = document.createElement('i');
-  todo_edit_el.classList.add('fa-solid');
-  todo_edit_el.classList.add('fa-pen-to-square');
-  todo_edit_el.classList.add('edit');
 
-  const todo_delete_el = document.createElement('i');
-  todo_delete_el.classList.add('fa-solid');
-  todo_delete_el.classList.add('fa-trash');
+if (document.readyState == 'loading'){
+    document.addEventListener('DOMContentLoaded' , ready);
+}
 
-  todo_actions_el.appendChild(todo_done_el)
-  todo_actions_el.appendChild(todo_edit_el);
-  todo_actions_el.appendChild(todo_delete_el);
+else{
+    ready();
+}
 
-  todo_el.appendChild(todo_actions_el);
-  console.log(todo_el)
-  document.querySelector('.todo-lists').appendChild(todo_el);
-  todo_done_el.addEventListener('click', () => {
-    todo_input_el.classList.add('done')
-    todo_el.removeChild(todo_actions_el);
-  })
 
-  todo_edit_el.addEventListener('click', (e) => {
-    if (todo_edit_el.classList.contains("edit")) {
-      todo_edit_el.classList.remove("edit");
-      todo_edit_el.classList.remove("fa-pen-to-square");
-      todo_edit_el.classList.add("fa-x");
-      todo_edit_el.classList.add("save");
-      todo_input_el.removeAttribute("readonly");
-      todo_input_el.focus();
-    } else {
-      todo_edit_el.classList.remove("save");
-      todo_edit_el.classList.remove("fa-x");
-      todo_edit_el.classList.add("fa-pen-to-square");
-      todo_edit_el.classList.add("edit");
-      todo_input_el.setAttribute("readonly", "readonly");
+ function ready(){
+    var removeCartItemButton = document.getElementsByClassName('btn-danger');
+    for (var i = 0 ; i < removeCartItemButton.length; i++){
+        var button = removeCartItemButton[i];
+        button.addEventListener('click', removeCartItem)
     }
-  });
 
-  todo_delete_el.addEventListener('click', (e) => {
-    console.log(todo_el);
-    document.querySelector('.todo-lists').removeChild(todo_el);
-  });
-})
+    var quantityInputs = document.getElementsByClassName('cart-quantity-input');
+    for(var i = 0 ;i < quantityInputs.length ; i++){
+        var input = quantityInputs[i];
+        input.addEventListener('change', quantityChanged);
+    }
+    
+    var addToCartButtons = document.getElementsByClassName('shop-item-button');
+    for(var i = 0; i< addToCartButtons.length; i++){
+        var button = addToCartButtons[i];
+        button.addEventListener('click',addToCartClicked)
+    }
+
+    document.getElementsByClassName('btn-purchase')[0].addEventListener('click', purchaseClicked)
+ }
+
+
+ function purchaseClicked(){
+     alert('Thank you for your purchase!!!');
+     var cartItems = document.getElementsByClassName('cart-items')[0];
+     while(cartItems.hasChildNodes()){
+         cartItems.removeChild(cartItems.firstChild)
+     }
+     updateCartTotal();
+ }
+
+function removeCartItem(event){
+    var buttonClicked = event.target;
+    buttonClicked.parentElement.parentElement.remove();
+    updateCartTotal();
+    
+}
+
+function  quantityChanged(event){
+    var input = event.target;
+    if(isNaN(input.value) || input.value <= 0 ){
+        input.value = 1;
+    }
+    updateCartTotal();
+}
+
+
+function addToCartClicked(event){
+    var button = event.target;
+    var shopItem = button.parentElement.parentElement;
+    var title = shopItem.getElementsByClassName('shop-item-title')[0].innerText;
+    var price = shopItem.getElementsByClassName('shop-item-price')[0].innerText;
+    var imageSrc = shopItem.getElementsByClassName('shop-item-image')[0].src;
+    addItemToCart(title,price,imageSrc);
+    updateCartTotal();
+}
+
+function addItemToCart(title, price, imageSrc){
+    var cartRow = document.createElement('tr');
+    cartRow.classList.add('cart-row');
+    var cartItems = document.getElementsByClassName('cart-items')[0];
+    var cartItemNames = cartItems.getElementsByClassName('cart-item-title');
+
+    for (i = 0; i< cartItemNames.length ; i++){
+        if(cartItemNames[i].innerText == title){
+            alert('This item already has added to the cart!');
+            return
+        }
+    }
+    var cartRowContents = `
+
+        <td class="cart-item cart-column">
+            <img class="cart-item-image" src="${imageSrc}" width="50" height="50">
+            <span class="cart-item-title">${title}</span>                  
+        </td>
+        <td class="cart-item cart-column">
+            <span class="cart-price cart-column">${price}</span>
+        </td>
+        <td class="cart-item cart-column">
+            <input class="cart-quantity-input" type="number" value="1" style="width: 50px">
+            <button class="btn btn-danger" type="button">Remove</button>
+        </td>        
+    `;
+     
+            
+    cartRow.innerHTML = cartRowContents;
+    cartItems.append(cartRow);
+    cartRow.getElementsByClassName('btn-danger')[0].addEventListener('click', removeCartItem);
+    cartRow.getElementsByClassName('cart-quantity-input')[0].addEventListener('change', quantityChanged)
+}
+
+
+function updateCartTotal(){
+    var cartItemContainer = document.getElementsByClassName('cart-items')[0];
+    var cartRows = cartItemContainer.getElementsByClassName('cart-row');
+    var total = 0;
+    for (var i = 0 ; i< cartRows.length ; i++){
+        var cartRow =cartRows[i];
+        var priceElement = cartRow.getElementsByClassName('cart-price')[0];
+        var quantityElement = cartRow.getElementsByClassName('cart-quantity-input')[0];
+        var price = parseFloat(priceElement.innerText.replace('Rs ' , ''))
+        var quantity = quantityElement.value;
+        total = total + (price * quantity);
+         
+    }
+    total = Math.round(total * 100 )/100;
+    document.getElementsByClassName('cart-total-price')[0].innerText = 'Rs '+ total + '.00';
+ 
+}
