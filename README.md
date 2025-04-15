@@ -1,4 +1,5 @@
-
+# Output
+  Website-
 # Shopping Cart - Javascript
 
 This is a Shopping Cart built with HTML, CSS,Bootstrap & JavaScript. In this simple shopping cart web application project I have used  some of the more intermediate advanced parts of the document object model or the javascript dom to show  how to build this web application. 
