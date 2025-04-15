@@ -1,15 +1,9 @@
 # Output
   Website-https://navin-e-commerce.netlify.app
-  
-  Upload Video For Output
-
-
 ![Image](https://github.com/user-attachments/assets/bf7e5b88-039f-4fab-8f54-8bfa0c64806a)
 ![Image](https://github.com/user-attachments/assets/9cea5786-2450-47cf-8c8d-4746c91ade85)
 ![Image](https://github.com/user-attachments/assets/f9597dfd-6225-4849-8445-5c99505ca408)
   ![Image](https://github.com/user-attachments/assets/b1f6fea5-fd63-4e78-a9be-69b165c79df8)
-
-
   
 # Shopping Cart - Javascript
 
